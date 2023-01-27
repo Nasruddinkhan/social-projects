@@ -1,0 +1,85 @@
+server:
+  port: 8095
+spring:
+  output.ansi.enabled: ALWAYS
+  cloud:
+    gateway:
+      routes:
+        ## USER SERVICE
+        - id: user-svc
+          uri: http://localhost:8090/
+          predicates:
+            - Path=/user-mgt/**
+          filters:
+            - name: Logging
+              args:
+                baseMessage: My Custom Message
+                preLogger: true
+                postLogger: true
+  application:
+    name: api-gatway
+management:
+  metrics.distribution.percentiles-histogram.http.server.requests: true
+  tracing.sampling.probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        #        include: '*'
+        include: '*'
+  endpoint:
+    info:
+      enabled: true
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
+    refresh:
+      enabled: true
+    health:
+      enabled: true
+      show-details: always
+    httptrace:
+      enabled: true
+    restart:
+      enabled: true
+    loggers:
+      enabled: true
+  metrics:
+    tags:
+      instance: dev
+      application: api-service
+    export:
+      prometheus:
+        enabled: true
+      enabled:
+        root: true
+        jvm: true
+  health:
+    circuitbreakers:
+      enabled: true
+    ratelimiters:
+      enabled: true
+
+
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: DEBUG
+#    reactor.netty.http.client: DEBUG
+#    com:
+#      mypractice:
+#        microservice: DEBUG
+#  file-path: C:/api-gatway/api-gatway.log
+
+logging:
+  level:
+    org.springframework.cloud.gateway: INFO
+    reactor.netty.http.client: INFO
+  pattern:
+    console: "%clr(%d{HH:mm:ss.SSS}){blue} %clr(%5p [${spring.application.name:}-%logger,%X{traceId:-},%X{spanId:-}]){yellow} %clr(:){red} %clr(%m){faint}%n"
+#logging.pattern.console: "%clr(%d{HH:mm:ss.SSS}){blue} %clr(%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]){yellow} %clr(:){red} %clr(%m){faint}%n" # (3)
+#opentracing:
+#  jaeger:
+#    http-sender:
+#      url: http://localhost:14268/api/traces
+
+

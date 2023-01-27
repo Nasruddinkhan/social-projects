@@ -1,0 +1,127 @@
+server:
+  port: 8090
+  webflux:
+    base-path: /users/api
+spring:
+  application:
+    name: users-svc
+    version: 0.0.1-SNAPSHOT
+  profiles:
+    active: default
+  data:
+    mongodb:
+      auto-index-creation: true
+      host: localhost
+      port: 27018
+      database: users-svc
+management:
+  metrics.distribution.percentiles-histogram.http.server.requests: true
+  tracing.sampling.probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+  endpoint:
+    info:
+      enabled: true
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
+    refresh:
+      enabled: true
+    health:
+      enabled: true
+      show-details: always
+    httptrace:
+      enabled: true
+    restart:
+      enabled: true
+  metrics:
+    tags:
+      instance: dev
+      application: user-svc
+    export:
+      prometheus:
+        enabled: true
+      enabled:
+        root: true
+        jvm: true
+  health:
+    circuitbreakers:
+      enabled: true
+    ratelimiters:
+      enabled: true
+#logging:
+#  level:
+#    request_trace: INFO
+#    org.springframework.data.mongodb.core.ReactiveMongoTemplate: INFO
+#    com:
+#      mypractice:
+#        microservice:
+#          usermgtsvc: DEBUG
+#  file-path: C:/user-svc/user-svc.log
+logging:
+  level:
+    org.springframework.cloud.gateway: INFO
+    reactor.netty.http.client: INFO
+  pattern:
+    console: "%clr(%d{HH:mm:ss.SSS}){blue} %clr(%5p [${spring.application.name:}-%logger,%X{traceId:-},%X{spanId:-}]){yellow} %clr(:){red} %clr(%m){faint}%n" # (3)
+#opentracing:
+#  jaeger:
+#    http-sender:
+#      url: http://localhost:14268/api/traces
+
+
+resilience4j.circuitbreaker:
+  instances:
+    users-svc:
+      registerHealthIndicator: true
+      slidingWindowSize: 100
+
+resilience4j.retry:
+  instances:
+    users-svc:
+      maxAttempts: 3
+      waitDuration: 10s
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
+      ignoreExceptions:
+        - io.github.robwin.exception.BusinessException
+
+
+resilience4j.bulkhead:
+  instances:
+    users-svc:
+      maxConcurrentCalls: 10
+    backendB:
+      maxWaitDuration: 10ms
+      maxConcurrentCalls: 20
+
+resilience4j.thread-pool-bulkhead:
+  instances:
+    backendC:
+      maxThreadPoolSize: 1
+      coreThreadPoolSize: 1
+      queueCapacity: 1
+      writableStackTraceEnabled: true
+
+resilience4j.ratelimiter:
+  instances:
+    users-svc:
+      limitForPeriod: 10
+      limitRefreshPeriod: 1s
+      timeoutDuration: 0
+      registerHealthIndicator: true
+      eventConsumerBufferSize: 100
+
+
+resilience4j.timelimiter:
+  instances:
+    users-svc:
+      timeoutDuration: 2s
+      cancelRunningFuture: true
