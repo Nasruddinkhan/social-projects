@@ -2,6 +2,7 @@ package com.mypractice.microservice.usermgtsvc.config.routes;
 
 import com.mypractice.microservice.usermgtsvc.common.enums.UriEnum;
 import com.mypractice.microservice.usermgtsvc.config.handler.PermissionHandler;
+import com.mypractice.microservice.usermgtsvc.config.handler.RoleHandler;
 import com.mypractice.microservice.usermgtsvc.config.handler.UsersHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,18 +21,24 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 
 @Configuration
 public class UserRoutes {
-    public static final String FUN_RUNTIME_EXCEPTION = "/fun/runtimeException";
 
     @Bean
-    public RouterFunction<ServerResponse> usersRoutes(UsersHandler usersHandler, PermissionHandler permissionHandler) {
+    public RouterFunction<ServerResponse> usersRoutes(final UsersHandler usersHandler, final PermissionHandler permissionHandler, final RoleHandler roleHandler) {
         System.out.println("UserRoutes.usersRoutes");
         return RouterFunctions.nest(path(UriEnum.URI_BASE_PATH.value()), route(RequestPredicates.POST(UriEnum.URI_USERS.value()).and(accept(MediaType.APPLICATION_JSON)), usersHandler::createUser)
                 .andRoute(GET(UriEnum.URI_USERS.value()).and(accept(MediaType.APPLICATION_JSON)), usersHandler::getUsers)
                 .andRoute(GET(UriEnum.URI_ALL_URLS.value()).and(accept(MediaType.APPLICATION_JSON)), this::allURLs)
                 .andRoute(GET(UriEnum.URI_PERMISSIONS.value()).and(accept(MediaType.APPLICATION_JSON)), permissionHandler::findPermissions)
+                .andRoute(GET(UriEnum.URI_PERMISSIONS_BY_ID.value()).and(accept(MediaType.APPLICATION_JSON)), permissionHandler::findPermissionById)
                 .andRoute(PUT(UriEnum.URI_PERMISSIONS.value()).and(accept(MediaType.APPLICATION_JSON)), permissionHandler::updatePermissions)
                 .andRoute(DELETE(UriEnum.URI_PERMISSIONS.value()).and(accept(MediaType.APPLICATION_JSON)), permissionHandler::deletePermissions)
                 .andRoute(RequestPredicates.POST(UriEnum.URI_PERMISSIONS.value()).and(accept(MediaType.APPLICATION_JSON)), permissionHandler::createPermission)
+                .andRoute(POST(UriEnum.URI_ROLES.value()).and(accept(MediaType.APPLICATION_JSON)), roleHandler::createRole)
+                .andRoute(PUT(UriEnum.URI_ROLES.value()).and(accept(MediaType.APPLICATION_JSON)), roleHandler::updateRole)
+                .andRoute(GET(UriEnum.URI_ROLES.value()).and(accept(MediaType.APPLICATION_JSON)), roleHandler::findAllRole)
+                .andRoute(GET(UriEnum.URI_ROLES_BY_ID.value()).and(accept(MediaType.APPLICATION_JSON)), roleHandler::findRoleById)
+                .andRoute(DELETE(UriEnum.URI_ROLES.value()).and(accept(MediaType.APPLICATION_JSON)), roleHandler::deleteRole)
+
         );
     }
 

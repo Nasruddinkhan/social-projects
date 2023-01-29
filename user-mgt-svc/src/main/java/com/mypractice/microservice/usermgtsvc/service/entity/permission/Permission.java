@@ -1,4 +1,4 @@
-package com.mypractice.microservice.usermgtsvc.service.entity;
+package com.mypractice.microservice.usermgtsvc.service.entity.permission;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,10 +15,14 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Permission {
+
     @Id
     private String id;
 
     @Field(name = "name")
     @Indexed(unique = true)
     private String name;
+
+
+
 }

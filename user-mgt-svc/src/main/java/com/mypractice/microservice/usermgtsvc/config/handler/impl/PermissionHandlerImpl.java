@@ -13,6 +13,8 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 @AllArgsConstructor
 @Slf4j
 @Service("permissionHandler")
@@ -40,6 +42,21 @@ public class PermissionHandlerImpl implements PermissionHandler {
         log.info("PermissionHandlerImpl.findPermissions end");
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
                 .body(permissions, PermissionDto.class);
+    }
+
+    @Override
+    public Mono<ServerResponse> findPermissionById(ServerRequest serverRequest) {
+        log.info("PermissionHandlerImpl.findPermissionById start");
+        final var permissionId = serverRequest.pathVariable("id");
+        final var permission = Optional.ofNullable(permissionId).
+                map(id -> permissionRepository.findById(id)
+                        .map(PermissionHelper::convertEntityToDTO)
+                        .switchIfEmpty(Mono.error(new RuntimeException("passing invalid id"))))
+                .orElseThrow(() -> new RuntimeException("request parameter is not present"));
+        log.info("PermissionHandlerImpl.findPermissionById end");
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                .body(permission, PermissionDto.class);
+
     }
 
 

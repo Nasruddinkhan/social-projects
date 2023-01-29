@@ -8,9 +8,12 @@ import java.util.stream.Collectors;
 
 public enum UriEnum {
     URI_BASE_PATH("/user-mgt/api"),
-    URI_USERS("/v2/users"),
-    URI_ALL_URLS("/v2/allUrls"),
-    URI_PERMISSIONS("/v1/permissions");
+    URI_USERS("/v1/users"),
+    URI_ALL_URLS("/v1/allUrls"),
+    URI_PERMISSIONS("/v1/permissions"),
+    URI_PERMISSIONS_BY_ID("/v1/permissions/{id}"),
+    URI_ROLES("/v1/roles"),
+    URI_ROLES_BY_ID("/v1/roles/{id}");
     private final String value;
 
     UriEnum(String value) {
