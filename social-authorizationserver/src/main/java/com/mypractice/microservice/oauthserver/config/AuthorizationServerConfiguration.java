@@ -1,11 +1,10 @@
 package com.mypractice.microservice.oauthserver.config;
 
-import com.mypractice.microservice.oauthserver.service.OidcUserInfoService;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -18,10 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
-import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.server.authorization.JwtEncodingContext;
-import org.springframework.security.oauth2.server.authorization.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.client.JdbcRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
@@ -36,9 +32,9 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
 
 @Configuration
-@AllArgsConstructor
 public class AuthorizationServerConfiguration {
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 	@Bean
 	public RegisteredClientRepository registeredClientRepository(JdbcTemplate jdbcTemplate) {
 		
@@ -111,19 +107,7 @@ public class AuthorizationServerConfiguration {
     }
 
 
-    @Bean
-    public OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizer(
-            OidcUserInfoService userInfoService) {
-        return context -> {
-            if (OidcParameterNames.ID_TOKEN.equals(context.getTokenType().getValue())) {
-                var userInfo = userInfoService.loadUser(
-                        context.getPrincipal().getName());
-                userInfo.entrySet().removeIf(e -> e.getKey().equals("password"));
-                context.getClaims().claims(claims ->
-                        claims.putAll(userInfo));
-            }
-        };
-    }
+
 
 	
 }
