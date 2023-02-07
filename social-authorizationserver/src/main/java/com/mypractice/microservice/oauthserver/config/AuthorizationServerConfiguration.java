@@ -62,7 +62,6 @@ public class AuthorizationServerConfiguration {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-
         return http.formLogin(Customizer.withDefaults()).build();
     }
     
@@ -82,10 +81,8 @@ public class AuthorizationServerConfiguration {
 
     @Bean
     public JWKSource<SecurityContext> jwkSource() throws NoSuchAlgorithmException {
-        RSAKey rsaKey = generateRsa();
-        JWKSet jwkSet = new JWKSet(rsaKey);
-
-        return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
+        final var rsaKey = generateRsa();
+        return (jwkSelector, securityContext) -> jwkSelector.select(new JWKSet(rsaKey));
     }
 
     private static RSAKey generateRsa() throws NoSuchAlgorithmException {
@@ -99,9 +96,8 @@ public class AuthorizationServerConfiguration {
     }
 
     private static KeyPair generateRsaKey() throws NoSuchAlgorithmException {
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+        final var keyPairGenerator = KeyPairGenerator.getInstance("RSA");
         keyPairGenerator.initialize(2048);
-
         return keyPairGenerator.generateKeyPair();
     }
 

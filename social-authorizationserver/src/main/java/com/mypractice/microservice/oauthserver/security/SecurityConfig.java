@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames
 import org.springframework.security.oauth2.server.authorization.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @EnableWebSecurity
 @AllArgsConstructor
@@ -24,17 +25,20 @@ public class SecurityConfig {
 				authorizeRequests.antMatchers("/assets/**", "/webjars/**", "/login").permitAll()
 				.anyRequest()
 						.authenticated())
-				//.userDetailsService()
-				//.formLogin(Customizer.withDefaults())
 				.formLogin()
 				.loginPage("/login.html")
 				.loginProcessingUrl("/login_process")
+				.failureUrl("/login.html?error=true")
+				.failureHandler(authenticationFailureHandler())
 				.and()
 				.userDetailsService(userDetailsService);
 		return http.build();
 
 	}
-
+	@Bean
+	public AuthenticationFailureHandler authenticationFailureHandler() {
+		return new CustomAuthenticationFailureHandler();
+	}
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
