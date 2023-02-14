@@ -40,7 +40,7 @@ public class User extends BaseIdEntity implements UserDetails {
     @JoinTable(name = "role_user", joinColumns = {
             @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = {
             @JoinColumn(name = "role_id", referencedColumnName = "id") })
-    private transient List<Role> roles;
+    private  List<Role> roles;
 
     @Override
     public boolean isEnabled() {
