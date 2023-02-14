@@ -58,9 +58,10 @@ public class AuthorizationServerConfiguration {
         final var keyPair = generateRsaKey();
         final var publicKey = (RSAPublicKey) keyPair.getPublic();
         final var privateKey = (RSAPrivateKey) keyPair.getPrivate();
+        final var keyID = UUID.randomUUID().toString();
         return new RSAKey.Builder(publicKey)
                 .privateKey(privateKey)
-                .keyID(UUID.randomUUID().toString())
+                .keyID(keyID)
                 .build();
     }
 

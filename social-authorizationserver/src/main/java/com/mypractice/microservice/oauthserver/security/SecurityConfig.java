@@ -1,7 +1,7 @@
 package com.mypractice.microservice.oauthserver.security;
 
 import com.mypractice.microservice.oauthserver.service.OidcUserInfoService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @EnableWebSecurity
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SecurityConfig {
 	private final UserDetailsService userDetailsService;
 	@Bean
@@ -50,11 +50,7 @@ public class SecurityConfig {
 			OidcUserInfoService userInfoService) {
 		return context -> {
 			if (OidcParameterNames.ID_TOKEN.equals(context.getTokenType().getValue())) {
-				var userInfo = userInfoService.loadUser( // <2>
-						context.getPrincipal().getName());
-				userInfo.entrySet().removeIf(e-> e.getKey().equals("password"));
-				context.getClaims().claims(claims ->
-						claims.putAll(userInfo));
+				context.getClaims().claims(claims -> claims.putAll(userInfoService.loadUser(context.getPrincipal().getName())));
 			}
 		};
 	}

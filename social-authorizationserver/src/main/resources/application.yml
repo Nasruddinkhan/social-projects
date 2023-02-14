@@ -1,6 +1,10 @@
 server:
   port: 8000
 spring:
+  jackson:
+    #default-property-inclusion: ALWAYS, CUSTOM, NON_ABSENT, NON_DEFAULT, NON_EMPTY, NON_NULL, USE_DEFAULTS
+    serialization:
+      write-dates-as-timestamps: false
   datasource:
     url: jdbc:mysql://localhost:3306/outhservice?useSSL=false
     username: root

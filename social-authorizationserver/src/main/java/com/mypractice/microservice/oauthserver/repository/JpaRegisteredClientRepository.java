@@ -24,7 +24,7 @@ import java.util.Set;
 import static java.util.stream.Collectors.toList;
 
 @Component
-public class JpaRegisteredClientRepository implements RegisteredClientRepository {
+public final class JpaRegisteredClientRepository implements RegisteredClientRepository {
     private final ClientRepository clientRepository;
     private final ObjectMapper objectMapper;
 
@@ -57,12 +57,11 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
     }
 
     private RegisteredClient toObject(final Client client) {
-        final var builder = getRegistrationClientBuilder(client);
-        final var clientSettingsMap = parseMap(client.getClientSettings());
-        builder.clientSettings(ClientSettings.withSettings(clientSettingsMap).build());
-        final var tokenSettingsMap = parseMap(client.getTokenSettings());
-        builder.tokenSettings(TokenSettings.withSettings(tokenSettingsMap).build());
-        return builder.build();
+
+        return getRegistrationClientBuilder(client)
+                .clientSettings(ClientSettings.withSettings(parseMap(client.getClientSettings())).build())
+                .tokenSettings(TokenSettings.withSettings(parseMap(client.getTokenSettings())).build())
+                .build();
     }
 
     private RegisteredClient.Builder getRegistrationClientBuilder(final Client client) {
@@ -91,14 +90,14 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
 
         grantTypes.addAll(authorizationGrantTypes
                             .stream()
-                            .map(JpaRegisteredClientRepository::resolveAuthorizationGrantType)
+                            .map(this::resolveAuthorizationGrantType)
                             .toList());
     }
 
     private void getClientAuthenticationMethods(final Set<ClientAuthenticationMethod> authenticationMethods,final Set<String> clientAuthenticationMethods) {
         authenticationMethods.addAll(clientAuthenticationMethods.stream()
-                .map(JpaRegisteredClientRepository::resolveClientAuthenticationMethod)
-                .collect(toList()));
+                .map(this::resolveClientAuthenticationMethod)
+                .toList());
     }
 
 
@@ -128,13 +127,13 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
     private List<String> getAuthorizationGrantTypes(final RegisteredClient registeredClient) {
       return   registeredClient.getAuthorizationGrantTypes().stream()
                 .map(AuthorizationGrantType::getValue)
-                .collect(toList());
+                .toList();
     }
 
     private List<String> getClientMethods(final RegisteredClient registeredClient) {
         return registeredClient.getClientAuthenticationMethods().stream()
                 .map(ClientAuthenticationMethod::getValue)
-                .collect(toList());
+                .toList();
     }
 
     private Map<String, Object> parseMap(final String data) {
@@ -154,7 +153,7 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
         }
     }
 
-    private static AuthorizationGrantType resolveAuthorizationGrantType(final String authorizationGrantType) {
+    private  AuthorizationGrantType resolveAuthorizationGrantType(final String authorizationGrantType) {
         return switch (authorizationGrantType) {
             case "AUTHORIZATION_CODE" -> AuthorizationGrantType.AUTHORIZATION_CODE;
             case "CLIENT_CREDENTIALS" -> AuthorizationGrantType.CLIENT_CREDENTIALS;
@@ -163,7 +162,7 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
         };
     }
 
-    private static ClientAuthenticationMethod resolveClientAuthenticationMethod(final String clientAuthenticationMethod) {
+    private  ClientAuthenticationMethod resolveClientAuthenticationMethod(final String clientAuthenticationMethod) {
         return switch (clientAuthenticationMethod) {
             case "CLIENT_SECRET_BASIC" -> ClientAuthenticationMethod.CLIENT_SECRET_BASIC;
             case "CLIENT_SECRET_POST" -> ClientAuthenticationMethod.CLIENT_SECRET_POST;

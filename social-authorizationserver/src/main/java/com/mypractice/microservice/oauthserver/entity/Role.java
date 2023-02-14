@@ -1,10 +1,14 @@
 package com.mypractice.microservice.oauthserver.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Role extends BaseIdEntity {
+@Data
+public class Role extends BaseIdEntity implements Serializable {
 
     private String name;
 
@@ -12,7 +16,7 @@ public class Role extends BaseIdEntity {
     @JoinTable(name = "permission_role", joinColumns = {
             @JoinColumn(name = "role_id", referencedColumnName = "id") }, inverseJoinColumns = {
             @JoinColumn(name = "permission_id", referencedColumnName = "id") })
-    private List<Permission> permissions;
+    private transient List<Permission> permissions;
 
     public String getName() {
         return name;
