@@ -1,7 +1,6 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 
-
 import CssBaseline from "@mui/material/CssBaseline";
 
 import Toolbar from "@mui/material/Toolbar";
@@ -12,21 +11,26 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import IconButton from "@mui/material/IconButton";
 import PersonIcon from "@mui/icons-material/Person";
 import MessageIcon from "@mui/icons-material/Message";
-import { Container, Tooltip } from "@mui/material";
-import { Button } from "@mui/material";
+import {  Container, List, ListItem, ListItemIcon, ListItemText, Tooltip } from "@mui/material";
 import CustomPopover from "../components/CustomPopover";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { setAnchorEl, setContent } from "../redux/popover";
+import { popoverActions } from "../redux/popover";
+import "./Pricing.scss";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
+
+
+
+import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
+import { FacebookSVGIcon } from "../assets/svg-icon/facebook";
 const PricingContent = () => {
-
   const dispatch = useDispatch();
   const [buttonRef, setButtonRef] = useState(null);
 
   const handleClick = (event) => {
-    dispatch(setAnchorEl(buttonRef));
-    dispatch(setContent("This is the popover content"));
+    dispatch(popoverActions.setAnchorEl(buttonRef));
+    dispatch(popoverActions.setContent("This is the popover content"));
   };
 
   return (
@@ -39,12 +43,13 @@ const PricingContent = () => {
         position="fixed"
         color="inherit"
         elevation={0}
+        className="appheader"
         sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
       >
         <Toolbar sx={{ flexWrap: "wrap" }}>
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            Company name
-          </Typography>
+          <ListItemIcon noWrap sx={{ flexGrow: 1 }} >
+            <FacebookSVGIcon />
+          </ListItemIcon>
           <nav>
             <Link sx={{ my: 1, mx: 1 }}>
               <Tooltip title="Notification" arrow>
@@ -68,7 +73,11 @@ const PricingContent = () => {
                 </IconButton>
               </Tooltip>
             </Link>
-            <Link sx={{ my: 1, mx: 1 }}>
+            <Link
+              sx={{ my: 1, mx: 1 }}
+              ref={setButtonRef}
+              onClick={handleClick}
+            >
               <Tooltip title="Account" arrow>
                 <IconButton
                   size="large"
@@ -82,16 +91,45 @@ const PricingContent = () => {
           </nav>
         </Toolbar>
       </AppBar>
-      <Container
-        disableGutters
-        maxWidth="sm"
-        component="main"
-        sx={{ pt: 8, pb: 6 }}
-      >
-        <Button ref={setButtonRef} onClick={handleClick}>
-          Open Popover
-        </Button>
-        <CustomPopover />
+      <Container maxWidth="false" sx={{ pt: 8.5 }} className="cssContainer">
+        <div className="mainContainer">
+          <div className="rowContainer">
+            <div className="leftColumn">
+              <List>
+                <ListItem>
+                  <ListItemIcon style={{ color: "#2196f3" }}>
+                    <HomeRoundedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Home" />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <EmailRoundedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Mail" />
+                </ListItem>
+              </List>
+            </div>
+            <div className="midColumn">
+              Chevrolet is one of the most recognizable and popular car brands
+              in the world. Founded in 1911 by Louis Chevrolet and William C.
+              Durant, the brand has become a symbol of quality and reliability
+            </div>
+            <div className="rightColumn">
+              Chevrolet is one of the most recognizable and popular car brands
+              in the world. Founded in 1911 by Louis Chevrolet and William C.
+              Durant, the brand has become a symbol of quality and reliability
+            </div>
+          </div>
+
+          {/* <Card className="">
+            <CardContent>
+              Chevrolet is one of the most recognizable and popular car brands
+              in the world. Founded in 1911 by Louis Chevrolet and William C.
+              Durant, the brand has become a symbol of quality and reliability
+            </CardContent>
+          </Card> */}
+        </div>
       </Container>
     </React.Fragment>
   );

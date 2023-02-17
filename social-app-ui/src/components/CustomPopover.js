@@ -2,15 +2,19 @@ import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Popover, Typography } from "@mui/material";
-import { selectAnchorEl, selectContent, setAnchorEl } from "../redux/popover";
+import { popoverActions } from "../redux/popover";
 
 const CustomPopover = () => {
   const dispatch = useDispatch();
-  const anchorEl = useSelector(selectAnchorEl);
-  const content = useSelector(selectContent);
+
+  // Define selectors
+  //export const selectAnchorEl = (state) => state.popover.anchorEl;
+  //export const selectContent = (state) => state.popover.content;
+  const anchorEl = useSelector((state) => state.popover.anchorEl);
+  const content = useSelector((state) => state.popover.content);
 
   const handleClose = () => {
-    dispatch(setAnchorEl(null));
+    dispatch(popoverActions.setAnchorEl(null));
   };
 
   return (
