@@ -1,34 +1,43 @@
 .imgStyle {
   border-radius: 20px;
 }
-.appheader{
+.appheader {
   box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
 }
 @media (min-width: 600px) {
-  .cssContainer  {
+  .cssContainer {
     padding-left: 5px !important;
     padding-right: 5px !important;
   }
 }
 
-
-.mainContainer{
+.mainContainer {
   width: 100;
   display: flex;
-   .rowContainer{
-        display: flex;
-   }
-   .leftColumn {
-    flex: 3;
-   }
+  .rowContainer {
+    display: flex;
+  }
+  .leftColumn {
+    flex: 2.5;
+  }
 
-   .midColumn{
-    flex: 6;
-   }
-   .rightColumn{
+  .midColumn {
+    flex: 6.5;
+  }
+  .rightColumn {
     flex: 3;
-   }
+  }
 }
-.x1ujvgzy{
-  color: #1877f2;
+.x1ujvgzy {
+  color: #1877f2 !important;
+}
+
+.Icons {
+  color: #1877f2 !important;
+  min-width: 35px !important;
+}
+
+.itemList:hover {
+  // border-left-color:  #1877f2 !important;
+  border-left: 5px solid #1877f2;
 }

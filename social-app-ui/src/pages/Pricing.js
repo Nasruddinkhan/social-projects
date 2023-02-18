@@ -11,15 +11,15 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import IconButton from "@mui/material/IconButton";
 import PersonIcon from "@mui/icons-material/Person";
 import MessageIcon from "@mui/icons-material/Message";
-import {  Container, List, ListItem, ListItemIcon, ListItemText, Tooltip } from "@mui/material";
+import {  Container, Divider, List, ListItem, ListItemIcon, ListItemText, Paper, Tooltip } from "@mui/material";
 import CustomPopover from "../components/CustomPopover";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { popoverActions } from "../redux/popover";
 import "./Pricing.scss";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-
-
+import PeopleIcon from "@mui/icons-material/People";
+import GroupIcon from "@mui/icons-material/Group";
 
 
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
@@ -47,9 +47,9 @@ const PricingContent = () => {
         sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
       >
         <Toolbar sx={{ flexWrap: "wrap" }}>
-          <ListItemIcon noWrap sx={{ flexGrow: 1 }} >
+          <Typography noWrap sx={{ flexGrow: 1 }}>
             <FacebookSVGIcon />
-          </ListItemIcon>
+          </Typography>
           <nav>
             <Link sx={{ my: 1, mx: 1 }}>
               <Tooltip title="Notification" arrow>
@@ -95,18 +95,96 @@ const PricingContent = () => {
         <div className="mainContainer">
           <div className="rowContainer">
             <div className="leftColumn">
-              <List>
-                <ListItem>
-                  <ListItemIcon style={{ color: "#2196f3" }}>
+              <List style={{ maxHeight: "600px", overflow: "auto" }}>
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
                     <HomeRoundedIcon />
                   </ListItemIcon>
                   <ListItemText primary="Home" />
                 </ListItem>
-                <ListItem>
-                  <ListItemIcon>
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
                     <EmailRoundedIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Mail" />
+                  <ListItemText primary="Nasruddin khan" />
+                </ListItem>
+                <Divider />
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
+                    <PeopleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Friends" />
+                </ListItem>
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
+                    <GroupIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Groups" />
+                </ListItem>
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
+                    <GroupIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Most Recent" />
+                </ListItem>
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
+                    <GroupIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Marketplace" />
+                </ListItem>
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
+                    <GroupIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Watch" />
+                </ListItem>
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
+                    <GroupIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="See All" />
+                </ListItem>
+
+                <Divider />
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
+                    <HomeRoundedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Spring & WebServices" />
+                </ListItem>
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
+                    <EmailRoundedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Kafka Service" />
+                </ListItem>
+
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
+                    <EmailRoundedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="See All" />
+                </ListItem>
+                <Divider />
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
+                    <HomeRoundedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Mumbai Rocks" />
+                </ListItem>
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
+                    <EmailRoundedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Saudi Groups" />
+                </ListItem>
+
+                <ListItem className="itemList" button>
+                  <ListItemIcon className="Icons">
+                    <EmailRoundedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="See All Shortcuts" />
                 </ListItem>
               </List>
             </div>
