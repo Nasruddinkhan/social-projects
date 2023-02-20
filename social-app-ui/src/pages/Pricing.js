@@ -11,8 +11,8 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import IconButton from "@mui/material/IconButton";
 import PersonIcon from "@mui/icons-material/Person";
 import MessageIcon from "@mui/icons-material/Message";
-import {  Container, Divider, List, ListItem, ListItemIcon, ListItemText, Paper, Tooltip } from "@mui/material";
-import CustomPopover from "../components/CustomPopover";
+import {  Card, CardContent, CardMedia, Container, Divider, List, ListItem, ListItemIcon, ListItemText, Tooltip } from "@mui/material";
+//import CustomPopover from "../components/CustomPopover";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { popoverActions } from "../redux/popover";
@@ -24,6 +24,9 @@ import GroupIcon from "@mui/icons-material/Group";
 
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import { FacebookSVGIcon } from "../assets/svg-icon/facebook";
+import StoriesUI from "../components/StoriesUI";
+import SwiperUI from "../components/Swipper";
+import CardUI from "../components/CardUI";
 const PricingContent = () => {
   const dispatch = useDispatch();
   const [buttonRef, setButtonRef] = useState(null);
@@ -189,9 +192,24 @@ const PricingContent = () => {
               </List>
             </div>
             <div className="midColumn">
-              Chevrolet is one of the most recognizable and popular car brands
-              in the world. Founded in 1911 by Louis Chevrolet and William C.
-              Durant, the brand has become a symbol of quality and reliability
+              <Card sx={{ minWidth: 275 }} className="storyCard">
+                <CardContent>
+                  <CardUI />
+                </CardContent>
+              </Card>
+              <Card sx={{ minWidth: 275 }} className="storyCard">
+                <CardContent>
+                  <div className="storyContainer">
+                    <div className="topStoryContainer">
+                      <img
+                        alt=""
+                        src="https://scontent.fruh7-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?stp=dst-png_p160x160&_nc_cat=1&ccb=1-7&_nc_sid=7206a8&_nc_ohc=G4ScZzW23xoAX_9X6gZ&_nc_ht=scontent.fruh7-1.fna&oh=00_AfD1mTFPsG9I6NzfkMEVE6Rbqqey4V-LaPouXKdqh_TLDA&oe=6419FDB8"
+                      />
+                    </div>
+                  </div>
+                 
+                </CardContent>
+              </Card>
             </div>
             <div className="rightColumn">
               Chevrolet is one of the most recognizable and popular car brands
