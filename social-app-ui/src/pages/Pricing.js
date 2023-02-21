@@ -2,7 +2,7 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 
 import CssBaseline from "@mui/material/CssBaseline";
-
+import AddIcon from "@mui/icons-material/Add";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
@@ -21,12 +21,14 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PeopleIcon from "@mui/icons-material/People";
 import GroupIcon from "@mui/icons-material/Group";
 
-
+import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import { FacebookSVGIcon } from "../assets/svg-icon/facebook";
 import StoriesUI from "../components/StoriesUI";
 import SwiperUI from "../components/Swipper";
 import CardUI from "../components/CardUI";
+import { AddSVGIcon } from "../assets/svg-icon/add";
+import FullWidthTabs from "../components/FullWidthTabs";
 const PricingContent = () => {
   const dispatch = useDispatch();
   const [buttonRef, setButtonRef] = useState(null);
@@ -42,12 +44,15 @@ const PricingContent = () => {
         styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
       />
       <CssBaseline />
+
       <AppBar
         position="fixed"
         color="inherit"
         elevation={0}
         className="appheader"
-        sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
+        sx={{
+          boxShadow: "0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);",
+        }}
       >
         <Toolbar sx={{ flexWrap: "wrap" }}>
           <Typography noWrap sx={{ flexGrow: 1 }}>
@@ -193,7 +198,9 @@ const PricingContent = () => {
             </div>
             <div className="midColumn">
               <Card sx={{ minWidth: 275 }} className="storyCard">
+                <FullWidthTabs />
                 <CardContent>
+                  <StoriesUI />
                   <CardUI />
                 </CardContent>
               </Card>
@@ -202,12 +209,49 @@ const PricingContent = () => {
                   <div className="storyContainer">
                     <div className="topStoryContainer">
                       <img
+                        className="storyImg"
                         alt=""
                         src="https://scontent.fruh7-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?stp=dst-png_p160x160&_nc_cat=1&ccb=1-7&_nc_sid=7206a8&_nc_ohc=G4ScZzW23xoAX_9X6gZ&_nc_ht=scontent.fruh7-1.fna&oh=00_AfD1mTFPsG9I6NzfkMEVE6Rbqqey4V-LaPouXKdqh_TLDA&oe=6419FDB8"
                       />
+                      <div className="imgDiv">
+                        <AddCircleTwoToneIcon className="addIcon" />
+                        <div>Create Story</div>
+                      </div>
+                    </div>
+                    <div className="topStoryContainer">
+                      <img
+                        className="storyImg"
+                        alt=""
+                        src="https://scontent.fruh7-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?stp=dst-png_p160x160&_nc_cat=1&ccb=1-7&_nc_sid=7206a8&_nc_ohc=G4ScZzW23xoAX_9X6gZ&_nc_ht=scontent.fruh7-1.fna&oh=00_AfD1mTFPsG9I6NzfkMEVE6Rbqqey4V-LaPouXKdqh_TLDA&oe=6419FDB8"
+                      />
+                      <div className="imgDiv">
+                        <AddCircleTwoToneIcon className="addIcon" />
+                        <div>Create Story</div>
+                      </div>
+                    </div>
+                    <div className="topStoryContainer">
+                      <img
+                        className="storyImg"
+                        alt=""
+                        src="https://scontent.fruh7-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?stp=dst-png_p160x160&_nc_cat=1&ccb=1-7&_nc_sid=7206a8&_nc_ohc=G4ScZzW23xoAX_9X6gZ&_nc_ht=scontent.fruh7-1.fna&oh=00_AfD1mTFPsG9I6NzfkMEVE6Rbqqey4V-LaPouXKdqh_TLDA&oe=6419FDB8"
+                      />
+                      <div className="imgDiv">
+                        <AddCircleTwoToneIcon className="addIcon" />
+                        <div>Create Story</div>
+                      </div>
+                    </div>
+                    <div className="topStoryContainer">
+                      <img
+                        className="storyImg"
+                        alt=""
+                        src="https://scontent.fruh7-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?stp=dst-png_p160x160&_nc_cat=1&ccb=1-7&_nc_sid=7206a8&_nc_ohc=G4ScZzW23xoAX_9X6gZ&_nc_ht=scontent.fruh7-1.fna&oh=00_AfD1mTFPsG9I6NzfkMEVE6Rbqqey4V-LaPouXKdqh_TLDA&oe=6419FDB8"
+                      />
+                      <div className="imgDiv">
+                        <AddCircleTwoToneIcon className="addIcon" />
+                        <div>Create Story</div>
+                      </div>
                     </div>
                   </div>
-                 
                 </CardContent>
               </Card>
             </div>

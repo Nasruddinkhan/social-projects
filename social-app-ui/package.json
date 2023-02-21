@@ -19,6 +19,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
+    "react-swipeable-views": "^0.14.0",
     "sass": "^1.58.1",
     "stories-react": "^1.0.18",
     "styled-components": "^5.3.6",

@@ -45,7 +45,7 @@ const stories = [
   },
   {
     type: "video",
-    url: "https://assets.mixkit.co/videos/preview/mixkit-man-dancing-under-changing-lights-1240-large.mp4",
+    url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     duration: 28000,
   },
   {
