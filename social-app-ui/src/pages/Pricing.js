@@ -28,7 +28,8 @@ import StoriesUI from "../components/StoriesUI";
 import SwiperUI from "../components/Swipper";
 import CardUI from "../components/CardUI";
 import { AddSVGIcon } from "../assets/svg-icon/add";
-import FullWidthTabs from "../components/FullWidthTabs";
+import FullWidthTabs from "../components/tabs/FullWidthTabs";
+import StoriesCard from "../components/stories/cards/StoriesCard";
 const PricingContent = () => {
   const dispatch = useDispatch();
   const [buttonRef, setButtonRef] = useState(null);
@@ -51,7 +52,8 @@ const PricingContent = () => {
         elevation={0}
         className="appheader"
         sx={{
-          boxShadow: "0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);",
+          boxShadow:
+            "0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);",
         }}
       >
         <Toolbar sx={{ flexWrap: "wrap" }}>
@@ -200,11 +202,11 @@ const PricingContent = () => {
               <Card sx={{ minWidth: 275 }} className="storyCard">
                 <FullWidthTabs />
                 <CardContent>
-                  <StoriesUI />
-                  <CardUI />
+                  {/* <StoriesUI />
+                  <CardUI /> */}
                 </CardContent>
               </Card>
-              <Card sx={{ minWidth: 275 }} className="storyCard">
+              {/* <Card sx={{ minWidth: 275 }} className="storyCard">
                 <CardContent>
                   <div className="storyContainer">
                     <div className="topStoryContainer">
@@ -253,7 +255,7 @@ const PricingContent = () => {
                     </div>
                   </div>
                 </CardContent>
-              </Card>
+              </Card>  */}
             </div>
             <div className="rightColumn">
               Chevrolet is one of the most recognizable and popular car brands

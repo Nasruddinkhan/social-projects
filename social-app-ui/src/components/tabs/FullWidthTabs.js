@@ -7,6 +7,12 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import StoriesCard from '../stories/cards/StoriesCard';
+import "./FullWidthTabs.scss";
+import ReelCard from '../reals/ReelCard';
+import { StoriesIcon } from "./../../assets/svg-icon/stories";
+import { ReelSVGIcon } from "./../../assets/svg-icon/reels";
+import { RoomSvgIcon } from "./../../assets/svg-icon/rooms";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,11 +69,29 @@ export default function FullWidthTabs() {
           textColor="inherit"
           variant="fullWidth"
           aria-label="full width tabs example"
-          style={{backgroundColor: "#fff", color:"black"}}
+          style={{ backgroundColor: "#fff", color: "black" }}
         >
-          <Tab label="Stories" {...a11yProps(0)} />
-          <Tab label="Reels" {...a11yProps(1)} />
-          <Tab label="Rooms" {...a11yProps(2)} />
+          <Tab
+            icon={<StoriesIcon className="storiesIcon" />}
+            iconPosition="start"
+            label="Stories"
+            className="tabClass"
+            {...a11yProps(0)}
+          />
+          <Tab
+            icon={<ReelSVGIcon className="storiesIcon" />}
+            iconPosition="start"
+            label="Reels"
+            {...a11yProps(1)}
+            className="tabClass"
+          />
+          <Tab
+            icon={<RoomSvgIcon className="storiesIcon" />}
+            iconPosition="start"
+            label="Rooms"
+            className="tabClass"
+            {...a11yProps(2)}
+          />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -76,13 +100,13 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Stories
+          <StoriesCard />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Reels
+          <ReelCard />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Rooms
+          Room chat desing later
         </TabPanel>
       </SwipeableViews>
     </Box>
