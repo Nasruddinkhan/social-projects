@@ -1,6 +1,6 @@
 # Compiled class file
 *.class
-
+/social-app-ui/node_modules
 # Log file
 *.log
 

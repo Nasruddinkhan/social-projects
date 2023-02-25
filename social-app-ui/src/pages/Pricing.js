@@ -11,7 +11,20 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import IconButton from "@mui/material/IconButton";
 import PersonIcon from "@mui/icons-material/Person";
 import MessageIcon from "@mui/icons-material/Message";
-import {  Card, CardContent, CardMedia, Container, Divider, List, ListItem, ListItemIcon, ListItemText, Tooltip } from "@mui/material";
+import {
+  Avatar,
+  Card,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Container,
+  Divider,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Tooltip,
+} from "@mui/material";
 //import CustomPopover from "../components/CustomPopover";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -30,6 +43,8 @@ import CardUI from "../components/CardUI";
 import { AddSVGIcon } from "../assets/svg-icon/add";
 import FullWidthTabs from "../components/tabs/FullWidthTabs";
 import StoriesCard from "../components/stories/cards/StoriesCard";
+import { red } from "@mui/material/colors";
+
 const PricingContent = () => {
   const dispatch = useDispatch();
   const [buttonRef, setButtonRef] = useState(null);
@@ -256,6 +271,19 @@ const PricingContent = () => {
                   </div>
                 </CardContent>
               </Card>  */}
+
+              <Card sx={{ minWidth: 275 }} className="postFormard">
+                <CardContent>
+                  <CardHeader>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src=""
+                    />
+                  </CardHeader>
+                
+             
+                </CardContent>
+              </Card>
             </div>
             <div className="rightColumn">
               Chevrolet is one of the most recognizable and popular car brands
