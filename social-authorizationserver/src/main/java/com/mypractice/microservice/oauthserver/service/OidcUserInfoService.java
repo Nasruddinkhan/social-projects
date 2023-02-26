@@ -22,7 +22,6 @@ public class OidcUserInfoService {
                 "email", user.getEmail(),
                 "role", user.getRoles(),
                 "account_locked", user.isAccountNonLocked(),
-                "permission", user.getAuthorities(),
                 "credentials_expired", user.isCredentialsNonExpired(),
                 "account_expired", user.isAccountNonExpired()
         );

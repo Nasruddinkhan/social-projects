@@ -38,7 +38,7 @@ public class AuthorizationServerConfiguration {
     @Bean
     public ProviderSettings providerSettings() {
         return ProviderSettings.builder()
-                .issuer("http://auth-server:8000")
+                .issuer("http://127.0.0.1:8000")
                 .build();
     }
     

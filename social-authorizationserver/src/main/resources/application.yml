@@ -13,8 +13,6 @@ spring:
     tomcat:
       test-while-idle: true
       validation-query: SELECT 1
-    initialization-mode: never
-    platform: mysql
   jpa:
     open-in-view: true
     properties:
